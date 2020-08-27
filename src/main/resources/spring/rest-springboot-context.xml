@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:cxf="http://camel.apache.org/schema/cxf"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd         http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <camelContext id="cxfrs-ffc68323-e49c-48e5-9185-e571bf89293e" xmlns="http://camel.apache.org/schema/spring">
+        <dataFormats>
+            <xmljson id="xmljson"/>
+        </dataFormats>
+        <restConfiguration apiContextPath="/api-docs" bindingMode="auto"
+            component="jetty" enableCORS="true" host="localhost" port="8081">
+          <apiProperty key="api.version" value="1.0.0"/>
+          <apiProperty key="api.title" value="Country Info API"/>
+          <apiProperty key="api.description" value="Country Info REST API"/>
+          <apiProperty key="api.contact.name" value="Awesome Developer"/>
+        </restConfiguration>
+        <rest apiDocs="true" consumes="appliation/json"
+            id="restCountryRequest" path="/api" produces="application/json">
+            <get apiDocs="true" id="restGetCountryRequest"
+                outType="io.spring.guides.gs_producing_web_service.GetCountryResponse"
+                produces="application/json" uri="/country/{name}">
+                <to uri="direct:getCountry"/>
+            </get>
+        </rest>
+        <route id="getCountry">
+            <from id="_from1" uri="direct:getCountry"/>
+            <transform id="_transform1">
+                <simple id="heardToBody" resultType="io.spring.guides.gs_producing_web_service.GetCountryRequest">${header.name}</simple>
+            </transform>
+            <log id="logBody" loggingLevel="INFO" message="Message body: ${body}"/>
+            <to id="_to1" uri="cxf://http://countries-soap-ws-soap.apps.cluster-c2ed.c2ed.example.opentlc.com:80/ws?serviceClass=io.spring.guides.gs_producing_web_service.CountriesPort&amp;defaultOperationName=getCountry"/>
+            <setHeader headerName="Content-Type" id="_setHeader1">
+                <constant>application/json</constant>
+            </setHeader>
+            <setBody id="_setBody1">
+                <simple>${body[0]}</simple>
+            </setBody>
+        </route>
+    </camelContext>
+</beans>
