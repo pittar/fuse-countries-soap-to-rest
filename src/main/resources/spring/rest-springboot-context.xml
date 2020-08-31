@@ -27,7 +27,7 @@
                 <simple id="heardToBody" resultType="io.spring.guides.gs_producing_web_service.GetCountryRequest">${header.name}</simple>
             </transform>
             <log id="logBody" loggingLevel="INFO" message="Message body: ${body}"/>
-            <to id="_to1" uri="cxf://http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example:80/ws?serviceClass=io.spring.guides.gs_producing_web_service.CountriesPort&amp;defaultOperationName=getCountry"/>
+            <to id="_to1" uri="cxf://http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example.opentlc.com:80/ws?serviceClass=io.spring.guides.gs_producing_web_service.CountriesPort&amp;defaultOperationName=getCountry"/>
             <setHeader headerName="Content-Type" id="_setHeader1">
                 <constant>application/json</constant>
             </setHeader>

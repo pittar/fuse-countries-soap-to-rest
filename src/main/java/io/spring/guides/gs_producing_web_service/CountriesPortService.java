@@ -15,7 +15,7 @@ import javax.xml.ws.Service;
  * countries-soap-ws-countries.apps.cluster-92d7.92d7.example
  */
 @WebServiceClient(name = "CountriesPortService",
-                  wsdlLocation = "http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example/ws/countries.wsdl",
+                  wsdlLocation = "http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example.opentlc.com/ws/countries.wsdl",
                   targetNamespace = "http://spring.io/guides/gs-producing-web-service")
 public class CountriesPortService extends Service {
 
@@ -26,11 +26,11 @@ public class CountriesPortService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example/ws/countries.wsdl");
+            url = new URL("http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example.opentlc.com/ws/countries.wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(CountriesPortService.class.getName())
                 .log(java.util.logging.Level.INFO,
-                     "Can not initialize the default wsdl from {0}", "http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example/ws/countries.wsdl");
+                     "Can not initialize the default wsdl from {0}", "http://countries-soap-ws-countries.apps.cluster-92d7.92d7.example.opentlc.com/ws/countries.wsdl");
         }
         WSDL_LOCATION = url;
     }
