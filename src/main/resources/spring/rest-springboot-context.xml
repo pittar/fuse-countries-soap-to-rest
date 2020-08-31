@@ -7,11 +7,11 @@
             <xmljson id="xmljson"/>
         </dataFormats>
         <restConfiguration apiContextPath="/api-docs" bindingMode="auto"
-            component="jetty" enableCORS="true" host="localhost" port="8081">
-          <apiProperty key="api.version" value="1.0.0"/>
-          <apiProperty key="api.title" value="Country Info API"/>
-          <apiProperty key="api.description" value="Country Info REST API"/>
-          <apiProperty key="api.contact.name" value="Awesome Developer"/>
+            component="jetty" enableCORS="true" host="localhost" port="8080">
+            <apiProperty key="api.version" value="1.0.0"/>
+            <apiProperty key="api.title" value="Country Info API"/>
+            <apiProperty key="api.description" value="Country Info REST API"/>
+            <apiProperty key="api.contact.name" value="Awesome Developer"/>
         </restConfiguration>
         <rest apiDocs="true" consumes="appliation/json"
             id="restCountryRequest" path="/api" produces="application/json">
